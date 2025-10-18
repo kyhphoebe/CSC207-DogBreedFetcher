@@ -29,10 +29,16 @@ public class CachingBreedFetcher implements BreedFetcher {
             return cache.get(breed);
         }
 
-        List<String> subBreeds = breedFetcher.getSubBreeds(breed);
         callsMade++;
-        cache.put(breed, new ArrayList<>(subBreeds));
-        return subBreeds;
+
+        try {
+            List<String> subBreeds = breedFetcher.getSubBreeds(breed);
+            cache.put(breed, new ArrayList<>(subBreeds));
+            return subBreeds;
+        }
+        catch (BreedNotFoundException e) {
+            throw e;
+        }
     }
 
     public int getCallsMade() {

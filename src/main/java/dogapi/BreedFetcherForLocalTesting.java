@@ -12,11 +12,12 @@ public class BreedFetcherForLocalTesting implements BreedFetcher {
 
     @Override
     public List<String> getSubBreeds(String breed) throws BreedNotFoundException {
+
         callCount++;
         if ("hound".equalsIgnoreCase(breed)) {
             return List.of("afghan", "basset");
         }
-        else {
+        else  {
             throw new BreedNotFoundException(breed);
         }
     }
